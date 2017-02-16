@@ -63,4 +63,17 @@ public class Sql2oTodoDao implements TodoDao{
             throw new DaoException(ex, "Problem deleting todo");
         }
     }
+
+    @Override
+    public Todo findById(Todo todo) throws DaoException{
+        String sql = "SELECT * FROM todos WHERE id=:id";
+        try (Connection conn = sql2o.open()){
+            return conn.createQuery(sql)
+                    .addParameter("id", todo.getId())
+                    .executeAndFetchFirst(Todo.class);
+        }catch(Sql2oException ex){
+            throw new DaoException(ex, "Problem finding todo");
+        }
+
+    }
 }
