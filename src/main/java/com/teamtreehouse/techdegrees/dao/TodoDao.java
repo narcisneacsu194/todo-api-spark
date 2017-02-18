@@ -6,13 +6,13 @@ import com.teamtreehouse.techdegrees.model.Todo;
 import java.util.List;
 
 public interface TodoDao {
-    List<Todo> findAll() throws DaoException;
+    List<Todo> findAll();
 
-    void save(Todo todo) throws DaoException;
+    void add(Todo todo) throws DaoException;
 
     void update(Todo todo) throws DaoException;
 
     void delete(Todo todo) throws DaoException;
 
-    Todo findById(Todo todo) throws DaoException;
+    Todo findById(int todo) throws DaoException;
 }
