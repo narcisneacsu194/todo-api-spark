@@ -4,7 +4,7 @@ import org.sql2o.Sql2oException;
 
 
 public class DaoException extends Exception {
-    private Exception originalException;
+    private final Exception originalException;
 
     public DaoException(Sql2oException originalException, String msg) {
         super(msg);
