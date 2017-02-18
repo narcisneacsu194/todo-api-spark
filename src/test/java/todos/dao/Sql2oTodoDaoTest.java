@@ -30,7 +30,7 @@ public class Sql2oTodoDaoTest {
         Todo todo = newTestTodo();
         int originalTodoId = todo.getId();
 
-        dao.save(todo);
+        dao.add(todo);
 
         assertNotEquals(originalTodoId, todo.getId());
     }
@@ -39,7 +39,7 @@ public class Sql2oTodoDaoTest {
     public void addedTodosAreReturnedFromFindAll() throws Exception{
         Todo todo = newTestTodo();
 
-        dao.save(todo);
+        dao.add(todo);
 
         assertEquals(1, dao.findAll().size());
     }
@@ -53,7 +53,7 @@ public class Sql2oTodoDaoTest {
     public void deletingOnlyTodoReturnsEmptyList() throws Exception{
         Todo todo = newTestTodo();
 
-        dao.save(todo);
+        dao.add(todo);
 
         dao.delete(todo);
 
@@ -64,25 +64,25 @@ public class Sql2oTodoDaoTest {
     public void updatingTodoNameChangesDaoTodoNameVariable() throws Exception{
         Todo todo = newTestTodo();
 
-        dao.save(todo);
+        dao.add(todo);
 
         todo.setName("Sleeping");
 
         dao.update(todo);
-        assertEquals(todo.getName(), dao.findById(todo).getName());
+        assertEquals(todo.getName(), dao.findById(todo.getId()).getName());
     }
 
     @Test
-    public void updatingTodoDoneChangesDaoTodoDoneVariable() throws Exception{
+    public void updatingTodoCompletedChangesDaoTodoCompletedVariable() throws Exception{
         Todo todo = newTestTodo();
 
-        dao.save(todo);
+        dao.add(todo);
 
-        todo.setDone(false);
+        todo.setCompleted(false);
 
         dao.update(todo);
 
-        assertEquals(todo.isDone(), dao.findById(todo).isDone());
+        assertEquals(todo.isCompleted(), dao.findById(todo.getId()).isCompleted());
     }
 
     private Todo newTestTodo(){
